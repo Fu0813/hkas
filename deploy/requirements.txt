@@ -1,0 +1,6 @@
+adbutils
+opencv-python
+numpy
+PyQt5
+PyQtWebEngine
+matplotlib
