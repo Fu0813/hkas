@@ -238,7 +238,9 @@ def mfunc_event2loop(device,mqueue):
                     BaseControl.stop_hold_right_and_wp1(device)
                     time.sleep(1)
                     target_levelup = cv.cvtColor(cv.imread(os.path.realpath(os.path.dirname(__file__) + "/Assets/p_btn_battleend_queding.png")), cv.COLOR_BGR2RGB)
-                    BaseControl.Match_and_Click(device,target_levelup)
+                    for _ in range(3):
+                        BaseControl.Match_and_Click(device,target_levelup,circle=1)
+                        time.sleep(0.5)
                     break
         time.sleep(2)
 
