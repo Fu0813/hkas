@@ -276,7 +276,7 @@ def CheckPage(img):
     max_result = result[max_key]
     print(max_key,max_result)
 
-    if(max_result[0] < 0.95):
+    if(max_result[0] < 0.90):
         print("匹配度过低，无法识别页面")
         return Page.Unknown,max_result
     else:
@@ -316,7 +316,7 @@ def Match_and_Click(device, img,bias=(20,20),circle = 4,label="",mode="mc"):
         src = np.array(device.screenshot())
         min, max, topleft_min, topleft_max = cv.minMaxLoc(cv.matchTemplate(src, img, cv.TM_CCOEFF_NORMED))
         print("Match result:",max)
-        if (max >= 0.95):
+        if (max >= 0.9):
             target_pos = (topleft_max[0] + bias[0], topleft_max[1] + bias[1])
             if("c" in mode):
                 adb_tool.click_with_random(device, target_pos, 0.2, (3, 3))
@@ -359,7 +359,7 @@ def Double_and_buy_stamina(device,mqueue):
     time.sleep(1)
     src = np.array(device.screenshot())
     min, max, topleft_min, topleft_max = cv.minMaxLoc(cv.matchTemplate(src, double_target, cv.TM_CCOEFF_NORMED))
-    if(max >=0.95):#使用双倍体力
+    if(max >=0.9):#使用双倍体力
         time.sleep(1)
         Match_and_Click(device,duihuan_target,circle = 1,label="双倍体力")
         flag = 1
@@ -369,7 +369,7 @@ def Double_and_buy_stamina(device,mqueue):
 
     src = np.array(device.screenshot())
     min, max, topleft_min, topleft_max = cv.minMaxLoc(cv.matchTemplate(src, buy_target, cv.TM_CCOEFF_NORMED))
-    if(max >=0.95):#购买体力窗口
+    if(max >=0.9):#购买体力窗口
         if(mqueue.buy_count[0] > 0):#确定购买
             if(Match_and_Click(device, goumai_target)):
                 flag = 1
@@ -399,7 +399,7 @@ def GotoFight(device,img,is_skip,is_ticket,mqueue,bias = (20,20),label=""):
                     src = np.array(device.screenshot())
                     min, max, topleft_min, topleft_max = cv.minMaxLoc(
                         cv.matchTemplate(src, target, cv.TM_CCOEFF_NORMED))
-                    if(max>=0.95):
+                    if(max>=0.9):
                         return False
             #快捷战斗
             target = cv.cvtColor(cv.imread(os.path.realpath(os.path.dirname(__file__) + "/Assets/p_btn_kuaijiezhandou.png")), cv.COLOR_BGR2RGB)
@@ -451,7 +451,7 @@ def GotoFight(device,img,is_skip,is_ticket,mqueue,bias = (20,20),label=""):
                 src = np.array(device.screenshot())
                 min, max, topleft_min, topleft_max = cv.minMaxLoc(cv.matchTemplate(src, target, cv.TM_CCOEFF_NORMED))
                 print("max:", max)
-                if (max >= 0.95):
+                if (max >= 0.9):
                     target_kaizhan = cv.cvtColor(
                         cv.imread(os.path.realpath(os.path.dirname(__file__) + "/Assets/p_btn_shimo_kaizhan.png")),
                         cv.COLOR_BGR2RGB)
